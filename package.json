@@ -1,0 +1,25 @@
+{
+  "name": "modulo-22---landing-page",
+  "version": "1.0.0",
+  "description": "Criação de Landing Page, módulo 22 EBAC.",
+  "homepage": "https://github.com/o-matheus/front_22_ebac_front#readme",
+  "bugs": {
+    "url": "https://github.com/o-matheus/front_22_ebac_front/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/o-matheus/front_22_ebac_front.git"
+  },
+  "license": "ISC",
+  "author": "Matheus Aguiar",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "parcel src/index.html src/styles/main.scss src/scripts/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.15.4",
+    "parcel": "^2.15.4",
+    "sharp": "^0.33.5"
+  }
+}
