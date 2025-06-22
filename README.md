@@ -3,7 +3,7 @@
 ## Menu
 [Aula 1 - Inicie o desenvolvimento da Landing Page  ](#aula-1---inicie-o-desenvolvimento-da-landing-page)  
 [Aula 2 - Analise o Layout ](#aula-2---analise-o-layout)  
-[Aula 3 - ]()  
+[Aula 3 - Construa o cabeçalho ](#aula-3---construa-o-cabeçalho)  
 [Aula 4 - ]()  
 [Aula 5 - ]()  
 [Aula 6 - ]()  
@@ -430,3 +430,192 @@ Após concluir os ajustes de layout, responsividade e overlay, o professor final
 * Fizemos ajustes de **responsividade** no Hero, garantindo melhor visualização em dispositivos móveis;
 * Definimos o **branco como cor base de fonte** do projeto;
 * Finalizamos a aula com um commit no repositório Git.
+
+## Aula 3 - Construa o cabeçalho
+
+### Objetivos da aula
+
+* Compreender a estrutura e organização do cabeçalho da landing page;
+* Dominar o uso de estilos CSS para o cabeçalho de acordo com o design especificado;
+* Tornar o cabeçalho responsivo.
+
+---
+
+### Estruturação da Infos Bar
+
+Nesta aula, o foco foi construir a **Infos Bar**, aquela **barra branca com informações de localização, preço e data**, além do botão **"Garantir minha vaga"**, localizada dentro do **Hero**, mas tratada como um **componente separado**.
+
+#### Estrutura HTML da Infos Bar
+
+Logo após o parágrafo da contagem regressiva, o professor criou uma `<div>` com a classe **`.infos-bar`**, contendo uma lista `<ul>` com a classe **`.infos-bar__infos`**.
+
+Cada item da lista (`<li>`) recebeu a classe **`.infos-bar__info`**, seguindo a **metodologia BEM**.
+
+**Estrutura HTML:**
+
+```html
+<div class="infos-bar">
+  <ul class="infos-bar__infos">
+    <li class="infos-bar__info">
+      <b>Localização</b>
+      Allianz Parque - Barra Funda - São Paulo/SP
+    </li>
+    <li class="infos-bar__info">
+      <b>Preço</b>
+      A partir de R$ 129,00
+    </li>
+    <li class="infos-bar__info">
+      <b>Quando</b>
+      10/10/1010
+    </li>
+  </ul>
+  <a href="#" class="button button--primary">Garantir minha vaga</a>
+</div>
+```
+
+---
+
+### Organização do CSS/SASS
+
+Diferente de outras aulas, onde as estilizações eram feitas por **sessões** (exemplo: Hero, Footer), o professor decidiu tratar a **Infos Bar como um componente isolado**, criando uma pasta dentro de **styles/components/** para organizar os estilos.
+
+#### Importação no SCSS
+
+A dúvida inicial foi sobre como importar o novo arquivo SCSS de dentro de uma pasta.
+O professor explicou que basta fazer o `@use` apontando para o caminho da pasta, ignorando o underline e a extensão do arquivo.
+
+Exemplo:
+
+```scss
+@use 'components/infos-bar';
+```
+
+---
+
+### Estilização da Infos Bar
+
+**Estilos aplicados à `.infos-bar`:**
+
+* **Padding:** `16px 24px`;
+* **Background:** Branco;
+* **Display:** Flex;
+* **Gap:** `40px`;
+* **Justify-content:** `space-between`;
+* **Align-items:** `center`;
+
+**Estilo dos itens da lista (`.infos-bar__info`):**
+
+* **Font-size padrão:** `14px`;
+* **Negrito (`<b>` dentro dos itens):**
+
+  * **Font-size:** `18px`;
+  * **Display:** `block` (para forçar quebra de linha abaixo do título);
+  * **Cor:** Preta (`#000`);
+
+**Outros ajustes:**
+
+* Removemos as bolinhas padrão da lista com:
+
+```css
+.infos-bar__infos {
+  list-style: none;
+}
+```
+
+* Adicionamos uma **margem de 8px** abaixo do `<b>` para garantir espaçamento entre o título e o texto.
+
+---
+
+### Criação e estilização do botão
+
+Foi criado um novo componente chamado **`buttons`** dentro de **components**.
+
+**Estilo base para todos os botões:**
+
+```css
+.button {
+  padding: 12px 24px;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  white-space: nowrap;
+}
+```
+
+**Variação para o botão primário (`.button--primary`):**
+
+* **Cor do texto:** Branco;
+* **Background:** `#4F2AC3`;
+
+---
+
+### Ajustes de responsividade
+
+#### No Tablet (max-width: 1024px):
+
+Apenas redução no **gap entre os itens da lista**, para dar mais espaço visual.
+
+#### No Mobile (max-width: 640px):
+
+As principais mudanças:
+
+* Alteração de **padding** da `.infos-bar` para `16px` em todos os lados;
+* Alteração no **gap** da lista para `15px`;
+* Aplicação de **display block** tanto na `.infos-bar__infos` quanto nos itens `.infos-bar__info`, forçando cada informação a ocupar uma linha inteira;
+* Ajuste do botão para **centralizar melhor o conteúdo** e evitar quebra desnecessária de linha;
+* Redução de tamanhos de fonte e margem para melhor adaptação visual.
+
+**Exemplo de media query para mobile:**
+
+```scss
+@media (max-width: 640px) {
+  .infos-bar {
+    padding: 16px;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .infos-bar__infos {
+    display: block;
+  }
+
+  .infos-bar__info {
+    display: block;
+    margin-top: 16px;
+  }
+
+  .button {
+    margin-top: 16px;
+  }
+}
+```
+
+---
+
+### Discussão sobre boas práticas
+
+Durante a aula, o professor comentou sobre a importância de **trabalhar com um layout pronto (como o Figma)** antes de codar.
+Isso evita retrabalho, erros de alinhamento e confusões de design.
+
+Também destacou o valor de já pensar na **responsividade durante o desenvolvimento**, ao invés de fazer ajustes apenas ao final.
+
+---
+
+### Problemas encontrados e soluções
+
+* **Dúvida inicial:** Como importar um arquivo SCSS de dentro de uma subpasta → Resolvido com o uso de `@use 'caminho/arquivo';`.
+* **Cor preta que não aplicava no `<b>`:** Foi reforçada a cor diretamente no seletor `.infos-bar__info b`.
+* **Espaçamento insuficiente entre o botão e os itens da lista no mobile:** Resolvi ajustando o padding e o gap manualmente via media query.
+
+---
+
+### **Resumo da Aula 3**
+
+* Construímos a **Infos Bar**, com localização, preço, data e botão CTA;
+* Adotamos a **metodologia BEM** para nomear as classes;
+* Organizamos o CSS/SASS criando a pasta **components** e usando `@use` para importar;
+* Estilizamos a barra com **flexbox**, **gap**, **alinhamento vertical** e **espaçamentos específicos**;
+* Criamos o componente **Buttons**, definindo o estilo padrão e a variação **Primary**;
+* Trabalhamos desde já a **responsividade** com media queries para tablet e mobile;
+* Discutimos sobre a importância de ter o **layout pronto no Figma** antes de codar.
