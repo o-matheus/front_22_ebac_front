@@ -4,8 +4,8 @@
 [Aula 1 - Inicie o desenvolvimento da Landing Page  ](#aula-1---inicie-o-desenvolvimento-da-landing-page)  
 [Aula 2 - Analise o Layout ](#aula-2---analise-o-layout)  
 [Aula 3 - Construa o cabeçalho ](#aula-3---construa-o-cabeçalho)  
-[Aula 4 - ]()  
-[Aula 5 - ]()  
+[Aula 4 - Insira a imagem de destaque ](#aula-4---insira-imagem-de-destaque)  
+[Aula 5 - Cria a descrição e a organização do evento ](#aula-5--cria-a-descrição-e-a-organização-do-evento)  
 [Aula 6 - ]()  
 
 ## Aula 1 - Inicie o desenvolvimento da Landing Page
