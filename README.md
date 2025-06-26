@@ -756,3 +756,117 @@ O professor iniciou os ajustes para garantir que a seção ficasse boa em **tabl
 * Ajustamos **espaçamentos** e **alinhamentos** com base no layout do Figma;
 * Trabalhamos a **responsividade**, usando media queries para mobile;
 * Adotamos a prática de **fazer os estilos mobile após finalizar os estilos desktop**.
+
+# Aula 5 – Cria a Descrição e a Organização do Evento
+
+## 🎯 Objetivos da aula
+
+* Compreender a importância da organização do código para o projeto da landing page
+* Dominar a criação de variáveis CSS
+* Aplicar animações com bibliotecas externas
+
+---
+
+## 🧱 Estruturação do Projeto
+
+A aula começou com a criação do arquivo `_variables.scss` dentro da pasta `styles`. O objetivo era centralizar valores recorrentes como **cores** e outras propriedades, facilitando alterações futuras no projeto.
+
+Inicialmente, o professor utilizava nomes de variáveis mais descritivos, como `text-color`, `background-color`, etc. Com o avanço da aula, ele passou a utilizar nomes baseados no contexto visual, como `blue1`, `blue2`, `pink1`, `yellow1`, etc., refletindo melhor as cores do design no Figma.
+
+### 🎨 Variáveis criadas:
+
+```scss
+$blue1: #b6caff;
+$blue2: #442bdb;
+$pink1: #89223b;
+$yellow1: #9c791d;
+$text-color: #ffffff;
+$secondary-color: #000000;
+$background-color-button: #4f2ac3;
+$background-color-infosbar: #ffffff;
+$background-color-overlay: #000000;
+```
+
+Foi feita também uma organização visual do arquivo usando comentários para separar por categorias, como:
+
+```scss
+// Cores do gradiente
+// Cores dos textos
+```
+
+Além disso, para usar essas variáveis em componentes SCSS separados por pastas, foi necessário importar o arquivo corretamente com:
+
+```scss
+@use '../variables';
+```
+
+---
+
+## 🧩 Organização das Seções
+
+O professor passou a utilizar modificadores para definir a cor de fundo de cada seção temática da página. As seções foram:
+
+1. `frontend` – azul para rosa
+2. `uxui` – rosa para amarelo
+3. `datascience` – amarelo para rosa
+4. `backend` – azul para azul
+
+A estrutura de cada seção seguiu o padrão:
+
+```html
+<section class="event event--frontend">
+  <div class="event__container">
+    <div class="event__details">
+      <h2 class="event__details__title">Front-End</h2>
+      <p class="event__details__description">Horário, etc.</p>
+    </div>
+    <img class="event__img" src="..." alt="Front-End" />
+  </div>
+</section>
+```
+
+As classes seguem o padrão BEM e cada parte da interface foi modularizada com clareza.
+A largura das imagens também foi ajustada conforme necessário (primeira seção com `600px`, demais com `500px`).
+
+---
+
+## 🔄 Inversão de Layout com Flex
+
+Para alternar a ordem das imagens e textos nas seções (como imagem à esquerda ou à direita), foi criado um modificador chamado `event--image-left`, que aplica a seguinte regra:
+
+```scss
+flex-direction: row-reverse;
+```
+
+Dessa forma, é possível alternar o layout **sem modificar a estrutura HTML**. O espaçamento entre imagem e texto foi mantido com:
+
+```scss
+gap: 40px;
+```
+
+---
+
+## ✨ Animações com AOS (Animate On Scroll)
+
+A biblioteca [AOS](https://michalsnik.github.io/aos/) foi introduzida para aplicar animações suaves ao scroll. O processo de instalação incluiu:
+
+1. Adicionar o link do CSS do AOS no `<head>` do `index.html` (logo após o `main.css`);
+2. Adicionar o script do AOS antes do fechamento da tag `</body>`;
+3. Inicializar a biblioteca no JS (caso necessário);
+4. Adicionar o atributo `data-aos` nos elementos desejados.
+
+Exemplo de uso:
+
+```html
+<div data-aos="fade-right"> ... </div>
+```
+
+⚠️ Durante os testes, foi percebido que aplicar a animação na **seção inteira** causava um “efeito de tela branca” incômodo durante o carregamento.
+**Solução aplicada**: adicionar o `data-aos` **apenas ao conteúdo interno**, como o texto e não ao `section` completo.
+
+---
+
+## ✅ Conclusão
+
+Essa aula destacou a importância da **organização do código**, do uso de **variáveis CSS** para facilitar a manutenção e da implementação de **animações com bibliotecas externas**, como a AOS, para enriquecer a experiência do usuário.
+Também foi possível aprofundar o uso de boas práticas como **modificadores CSS com BEM**, responsividade e uso de `flexbox` para controle de layout.

@@ -1,5 +1,6 @@
 @use 'hero';
 @use 'events';
+@use 'variables';
 @use 'components/infos_bar';
 @use 'components/buttons';
 
@@ -8,7 +9,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Roboto, sans-serif;
-    color: #fff;
+    color: variables.$textColor;
     list-style: none;
 }
 
