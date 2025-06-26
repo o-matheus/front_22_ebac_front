@@ -619,3 +619,140 @@ Também destacou o valor de já pensar na **responsividade durante o desenvolvim
 * Criamos o componente **Buttons**, definindo o estilo padrão e a variação **Primary**;
 * Trabalhamos desde já a **responsividade** com media queries para tablet e mobile;
 * Discutimos sobre a importância de ter o **layout pronto no Figma** antes de codar.
+
+## Aula 4 - Insira Imagem de Destaque
+
+### Objetivos da aula
+
+* Inserir imagens responsivas na landing page;
+* Aplicar gradientes de fundo em elementos HTML usando CSS;
+* Melhorar a responsividade do layout da landing page.
+
+---
+
+### Estrutura inicial da seção de destaque (Event)
+
+O professor começou criando uma nova **section** para exibir o conteúdo do evento **Front-End**, que inclui:
+
+* Um título (h2);
+* Um parágrafo descritivo (p);
+* Uma imagem ilustrativa.
+
+**Estrutura base criada:**
+
+```html
+<section class="event">
+  <div class="container">
+    <div class="event__details">
+      <h2 class="event__details__title">Front-End</h2>
+      <p class="event__details__description">Texto descritivo do evento.</p>
+    </div>
+    <img src="images/front-end.png" alt="Front-End" class="event__image">
+  </div>
+</section>
+```
+
+---
+
+### Aplicação da metodologia BEM
+
+O professor reforçou o uso da **metodologia BEM** na nomenclatura das classes:
+
+* A **section** recebeu a classe `event`;
+* O container de texto virou `event__details`;
+* O título ganhou a classe `event__details__title`;
+* O parágrafo recebeu `event__details__description`;
+* A imagem foi classificada como `event__image`.
+
+---
+
+### Estilização da seção Event
+
+#### Estilo das descrições (event\_\_details\_\_description):
+
+* **Font-size:** 16px (padrão dos parágrafos, sem necessidade de reespecificar);
+* **Line-height:** 16px, para manter a proporção visual do Figma;
+* **Margin-top:** 16px entre o título e o parágrafo.
+
+#### Estilo da imagem (event\_\_image):
+
+* **Max-width:** 360px;
+* **Margin-right:** 40px (espaço entre o texto e a imagem no layout desktop).
+
+---
+
+### Aplicação de gradiente de fundo
+
+O professor explicou como criar um gradiente usando a propriedade **`background-image`** com **linear-gradient**.
+
+**Exemplo de aplicação:**
+
+```css
+.event {
+  background-image: linear-gradient(90deg, #color1, #color2);
+}
+```
+
+**Parâmetros principais:**
+
+* **Angulação:** Em graus (ex: `90deg`);
+* **Cor inicial:** Exemplo: `#color1`;
+* **Cor final:** Exemplo: `#color2`;
+
+O professor mostrou como identificar as cores e o ângulo diretamente no Figma, clicando na área do fundo da seção.
+
+---
+
+### Responsividade da seção Event
+
+O professor iniciou os ajustes para garantir que a seção ficasse boa em **tablet** e **mobile**.
+
+#### Abordagem no código:
+
+* Primeiramente o professor escreveu todas as regras para o desktop;
+* Em seguida, usou um único **@media** específico para mobile (`max-width: 640px`), ajustando apenas as propriedades necessárias.
+
+#### Ajustes feitos no mobile:
+
+* Alteração da disposição de layout de **flex para block**;
+* Remoção da margem lateral entre os blocos;
+* Centralização da imagem com **`margin: 0 auto;`**;
+* Aplicação de **max-width: 80%** na imagem para melhor encaixe em telas menores;
+* Redução de espaçamentos e padding para melhor aproveitamento de tela.
+
+**Exemplo de media query:**
+
+```css
+@media (max-width: 640px) {
+  .event .container {
+    display: block;
+  }
+
+  .event__image {
+    max-width: 80%;
+    margin: 0 auto;
+  }
+
+  .event__details {
+    margin-right: 0;
+  }
+}
+```
+
+---
+
+### Boas práticas reforçadas na aula
+
+* O professor recomendou **concentrar os media queries após todas as configurações de desktop**, para manter a organização do código e facilitar a manutenção.
+* Também destacou a importância de **ter um layout bem definido no Figma antes de codar**, evitando retrabalho.
+
+---
+
+### **Resumo da Aula 4**
+
+* Criamos a seção **Event** com título, descrição e imagem;
+* Utilizamos a metodologia **BEM** para nomeação de classes;
+* Aplicamos um **gradiente de fundo** usando `linear-gradient`;
+* Ajustamos **espaçamentos** e **alinhamentos** com base no layout do Figma;
+* Trabalhamos a **responsividade**, usando media queries para mobile;
+* Adotamos a prática de **fazer os estilos mobile após finalizar os estilos desktop**.
