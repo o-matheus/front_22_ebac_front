@@ -6,7 +6,7 @@
 [Aula 3 - Construa o cabeçalho ](#aula-3---construa-o-cabeçalho)  
 [Aula 4 - Insira a imagem de destaque ](#aula-4---insira-imagem-de-destaque)  
 [Aula 5 - Cria a descrição e a organização do evento ](#aula-5--cria-a-descrição-e-a-organização-do-evento)  
-[Aula 6 - ]()  
+[Aula 6 - Insira a contagem regressiva e deploy Vercel ](#aula-6--contagem-regressiva-e-deploy-vercel)  
 
 ## Aula 1 - Inicie o desenvolvimento da Landing Page
 
@@ -870,3 +870,104 @@ Exemplo de uso:
 
 Essa aula destacou a importância da **organização do código**, do uso de **variáveis CSS** para facilitar a manutenção e da implementação de **animações com bibliotecas externas**, como a AOS, para enriquecer a experiência do usuário.
 Também foi possível aprofundar o uso de boas práticas como **modificadores CSS com BEM**, responsividade e uso de `flexbox` para controle de layout.
+
+## Aula 6 – Contagem regressiva e deploy Vercel
+
+### Objetivos
+
+* Compreender o uso da função `getTime`
+* Aplicar as funções `setInterval` e `clearInterval`
+* Criar uma contagem regressiva funcional para a landing page
+
+### Introdução
+
+Nesta aula, trabalhamos com manipulação de datas e criação de uma contagem regressiva funcional usando JavaScript. O objetivo era exibir dinamicamente o tempo restante até a data de realização do evento, atualizando os valores de dias, horas, minutos e segundos em tempo real.
+
+### Manipulando datas no JavaScript
+
+Começamos explorando o objeto `Date`, que permite lidar com datas em qualquer linguagem de programação. Utilizamos a construção `new Date()` para obter a data atual e, em seguida, aprendemos a extrair informações específicas com métodos como `getFullYear()`, `getMonth()` e `getTime()`.
+
+Foi importante notar que os meses retornados por `getMonth()` começam do índice 0 (janeiro) até 11 (dezembro), o que exigiu atenção no uso dessas funções.
+
+### Definindo a data do evento
+
+Para configurar uma contagem regressiva, foi criada uma constante com a data e hora do evento:
+
+```js
+const dataEvento = new Date("Jul 22 2025 19:00:00");
+```
+
+Depois, o `getTime()` foi utilizado para obter o timestamp correspondente a essa data:
+
+```js
+const timestampEvento = dataEvento.getTime();
+```
+
+### Criando a contagem regressiva com `setInterval`
+
+Foi utilizada a função `setInterval()` para atualizar o tempo restante a cada segundo. A lógica foi encapsulada em uma constante chamada `contaOTempo`, e dentro da função definimos os cálculos para converter milissegundos em dias, horas, minutos e segundos:
+
+```js
+const diasMs = 1000 * 60 * 60 * 24;
+const horasMs = 1000 * 60 * 60;
+const minutosMs = 1000 * 60;
+const segundosMs = 1000;
+```
+
+A cada ciclo do `setInterval`, o timestamp atual era recalculado, e o tempo restante até o evento era determinado:
+
+```js
+const tempoEvento = timestampEvento - timestampAgora;
+```
+
+Os valores eram arredondados para baixo com `Math.floor()`, e os módulos eram utilizados para calcular corretamente os valores restantes para cada unidade de tempo:
+
+```js
+const diasEvento = Math.floor(tempoEvento / diasMs);
+const horasEvento = Math.floor((tempoEvento % diasMs) / horasMs);
+const minutosEvento = Math.floor((tempoEvento % horasMs) / minutosMs);
+const segundosEvento = Math.floor((tempoEvento % minutosMs) / segundosMs);
+```
+
+### Exibindo a contagem no HTML
+
+Para exibir os valores no HTML, usamos o `document.getElementById()` combinando com `innerHTML`:
+
+```js
+document.getElementById('contador').innerHTML = `${diasEvento}d ${horasEvento}h ${minutosEvento}m ${segundosEvento}s`;
+```
+
+Essa estrutura foi atualizada a cada segundo, garantindo uma contagem regressiva visual e funcional.
+
+### Lidando com eventos passados
+
+Para evitar que a contagem regressiva exibisse valores negativos após a data do evento, implementamos uma verificação:
+
+```js
+if (tempoEvento < 0) {
+  clearInterval(contaOTempo);
+  document.getElementById('contador').innerHTML = "O evento já foi realizado";
+}
+```
+
+Essa condição interrompe a execução do `setInterval` com `clearInterval()` e substitui o conteúdo por uma mensagem estática.
+
+### Compilação e build com Parcel
+
+Após concluída a parte da contagem regressiva, organizamos o build do projeto com o Parcel. Diferente do Gulp, o Parcel já reconhece automaticamente as dependências definidas no `index.html`, facilitando o processo de compilação.
+
+Adicionamos o seguinte comando no `package.json`:
+
+```json
+"build": "parcel build index.html"
+```
+
+Esse comando, executado com `npm run build`, compilou o projeto, otimizando os arquivos HTML, CSS, JS e imagens de forma automática. O Parcel exibiu no terminal o tempo gasto em cada etapa da build.
+
+Foi importante garantir que não existiam caminhos incorretos ou referências quebradas no `index.html`, pois um erro como `main/index.js` inexistente pode causar falha na build.
+
+### Considerações finais
+
+Apesar de alguns pequenos problemas com o Sass, como a necessidade de salvar manualmente (`Ctrl+S`) para o Parcel reconhecer alterações, o uso dessa ferramenta foi bastante satisfatório. A simplicidade no setup e a automação na build facilitaram muito o fluxo de trabalho.
+
+Agora resta a dúvida entre buscar outras ferramentas com integração melhor ao Sass ou seguir utilizando o Parcel com essas limitações conhecidas. De todo modo, o aprendizado foi consolidado com sucesso.
